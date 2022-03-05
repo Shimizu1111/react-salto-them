@@ -23,7 +23,7 @@ export default function Sidebar() {
   };
 
 
-  // 
+  // MainやSettingsなどコンテンツごとに表示する項目
   const sidebar_components = sidebar_components_name.map((sidebar_component_name) =>
     <React.Fragment key={sidebar_component_name.id}>
       <div className={sidebar_component_name.class}>
@@ -35,7 +35,7 @@ export default function Sidebar() {
     </React.Fragment>
   );
 
-  /**表示項目
+  /**サイドバーの表示項目
    * ・Dashbord
    * 　・Dashbord
    * ・Main
