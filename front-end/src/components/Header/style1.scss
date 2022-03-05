@@ -5,6 +5,7 @@ header {
   height: 40px;
   font-size: 20px;
   color: #fff;
+  background: #ff4d00;
   text-align: center;
 }
 
@@ -36,26 +37,30 @@ header {
 .container_right_justified {
   width: 15%;
   height: 100%;
+  background-color: aqua;
   margin-left: auto;
   display: flex;
   align-items: center;
-  width: 30%;
-  .ellipse {
-    height: 50%;
-    margin-left: 5%;
-  }
-  .notification {
-    height: 50%;
-    margin-left: 5%;
-  }
-  .group {
-    height: 50%;
-    margin-left: 5%;
-  }
-  .beared-guy {
-    height: 70%;
-    margin-left: 5%;
-  }
+}
+
+.ellipse {
+  height: 50%;
+  margin-left: 5%;
+}
+
+.notification {
+  height: 50%;
+  margin-left: 5%;
+}
+
+.group {
+  height: 50%;
+  margin-left: 5%;
+}
+
+.beared-guy {
+  height: 70%;
+  margin-left: 5%;
 }
 
 .profile {
@@ -63,9 +68,8 @@ header {
   flex-direction: column;
   p {
     color: black;
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 1rem;
     padding: 0;
-    text-align: left;
     &:first-child {
       font-size: 0.75rem;
       font-weight: 600;
