@@ -14,6 +14,8 @@ export default function Body() {
   for (let i = 0; i < columns; i++) {
     items.push(item);
   }
+  console.log('helloooooooo')
+  console.log(items);
 
   return (
     <div class="items">
