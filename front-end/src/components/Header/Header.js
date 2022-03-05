@@ -8,7 +8,6 @@ export default function Header() {
       <div class='search_box'>
         <input type='text' placeholder='search' />
       </div>
-      Header components
       <div className='container_right_justified'>
         <img src='./images/Ellipse176.png' className='ellipse' />
         <img src='./images/Notification.png' className='notification' />
