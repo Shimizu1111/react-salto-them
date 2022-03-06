@@ -3,8 +3,8 @@ import './style.scss';
 
 export default function Sidebar() {
   const sidebar_components_name  = [
-    {title: 'Main', class: 'sidebar_main', row: ['Users', 'Posts', 'Categories'], image: ['Dashbord.png', 'Dashbord.png', 'Dashbord.png']},
-    {title: 'Settings', class: 'sidebar_settings', row: ['Profile', 'Roles', 'Maps'], image: ['Dashbord.png', 'Dashbord.png', 'Dashbord.png']}
+    {title: 'Main', class: 'sidebar_main', row: ['Users', 'Posts', 'Categories'], image: ['3User.png', 'Game.png', 'Categories.png']},
+    {title: 'Settings', class: 'sidebar_settings', row: ['Profile', 'Roles', 'Maps'], image: ['Document.png', 'Setting.png', 'Location.png']}
   ];
 
   /** Main・Settingsなどのコンテンツのリンク先を表示する項目
