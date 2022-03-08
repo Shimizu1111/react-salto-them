@@ -1,3 +1,6 @@
+$backgrount-color: white;
+$border-color: #ccc;
+
 .items{
 	display: flex;
 	justify-content: space-around;
@@ -18,13 +21,20 @@
 .item{
 	width: 23%;
 	height: 27%;
-	background: #3D9FB1;
 	margin-top: 2%;
+	border: 2px solid $border-color;
 }
 .box-image{
   height: 60%;
   width: 100%;
 }
+
+.introduction {
+	height: 200px;
+	width: 350px;
+	border-bottom: 3px solid $border-color;
+}
+
 .title {
   margin: 0;
   padding: 0;
