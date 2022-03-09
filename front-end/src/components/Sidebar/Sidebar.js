@@ -1,5 +1,7 @@
 import React from 'react';
 import './style.scss';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import User from '../Content/User/User';
 
 export default function Sidebar() {
   const sidebar_components_name  = [
@@ -15,7 +17,18 @@ export default function Sidebar() {
     return(
       <div className='sidebar_main_inner'>
         <img src={'./images/' + content_image}  className='users-image' />
-        <p>{content_row}</p>
+        {/* <BrowserRouter> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path='/user' element={<User />} />
+          </Routes>
+        </BrowserRouter>
+          <p>{content_row}</p>
+          {/* <Route path="/user">
+            <User />
+          </Route>
+        </BrowserRouter> */}
+        
       </div>
     )
   };
