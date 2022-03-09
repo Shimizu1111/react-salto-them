@@ -1,14 +1,17 @@
 $backgrount-color: white;
 $border-color: #ccc;
 
-.container {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-
 .right-wrapper {
 	background-color: $border-color;
+	min-height: 200vh;
+  width: 90%;
+}
+
+.wrapper {
+  background-color: $backgrount-color;
+  margin-left:  10px;
+  border-radius: 5px;
+  padding-top: 20px;
 }
 
 * {
@@ -19,20 +22,24 @@ td {
   border: solid 1px;
   text-align: left;
 }
+th {
+  border-bottom: solid 2px;
+}
 
 table {
   border-collapse: collapse; 
-  width: 100%; 
-  background-color: #fff;
+  width: 98%; 
+  background-color: $backgrount-color;
   margin: 10px;
+  height: 10%;
 }
 
 td {
-  height: 41px;
+  height: 20%;
 }
 
-table tr:nth-child(odd) {
-  background-color: #eee;
+table tr:nth-child(even) {
+  background-color: $border-color;
 }
 
 .checkbox-Area {
@@ -45,11 +52,11 @@ table tr:nth-child(odd) {
 }
 .email_Area {
   min-width: 159px;
-  height: 24px;
+  height: 3%;
 }
 .status_Area {
   min-width: 159px;
-  height: 24px;
+  height: 3%;
 }
 td a {
   padding-right: 5px;
