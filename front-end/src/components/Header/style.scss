@@ -25,7 +25,7 @@ header {
     background: url(../../../public/images/Search.png) no-repeat center center / auto 100%; /* 背景にアイコン画像を配置 */
     display: inline-block; /* 高さを持たせるためにインラインブロック要素にする */
     position: absolute;    /* 相対位置に指定 */
-    top: 10px;              /* アイコンの位置。微調整してね */
+    top: 5px;              /* アイコンの位置。微調整してね */
     left: 5px;             /* アイコンの位置。微調整してね */
   }
   input {

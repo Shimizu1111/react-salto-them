@@ -122,8 +122,8 @@ export default function User () {
               </tbody>
             </table>
             <Pagination />
-            <Footer />
-          </div>
+            </div>
+          <Footer />
         </div>
       </div>
     </>
