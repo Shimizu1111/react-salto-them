@@ -1,34 +1,33 @@
 import React from 'react';
 import './style.scss';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import User from '../Content/User/User';
 
 export default function Sidebar() {
   const sidebar_components_name  = [
-    {title: 'Main', class: 'sidebar_main', row: ['Users', 'Posts', 'Categories'], image: ['3User.png', 'Game.png', 'Categories.png']},
-    {title: 'Settings', class: 'sidebar_settings', row: ['Profile', 'Roles', 'Maps'], image: ['Document.png', 'Setting.png', 'Location.png']}
+    {
+      title: 'Main',  
+      class: 'sidebar_main', 
+      row: ['Users', 'Posts', 'Categories'], 
+      link: ['users', '', 'categories'], 
+      image: ['3User.png', 'Game.png', 'Categories.png']
+    },
+    {
+      title: 'Settings', 
+      class: 'sidebar_settings', 
+      row: ['Profile', 'Roles', 'Maps'], 
+      link: ['profile', 'roles', 'maps'], 
+      image: ['Document.png', 'Setting.png', 'Location.png']
+    }
   ];
 
   /** Main・Settingsなどのコンテンツのリンク先を表示する項目
    * レコードの左側：アイコン
    * レコードの右側：リンク先の名前
    */
-  const sidebar_content_inner = (content_row, content_image) => {
+  const sidebar_content_inner = (content_row, content_image, content_link) => {
     return(
       <div className='sidebar_main_inner'>
         <img src={'./images/' + content_image}  className='users-image' />
-        {/* <BrowserRouter> */}
-        <BrowserRouter>
-          <Routes>
-            <Route path='/user' element={<User />} />
-          </Routes>
-        </BrowserRouter>
-          <p>{content_row}</p>
-          {/* <Route path="/user">
-            <User />
-          </Route>
-        </BrowserRouter> */}
-        
+        <a href={'/' + content_link}>{content_row}</a>
       </div>
     )
   };
@@ -38,7 +37,7 @@ export default function Sidebar() {
     <div className={sidebar_component_name.class}>
       {sidebar_component_name.title}
       {sidebar_component_name.row.map((component_row_name, i) => 
-          sidebar_content_inner(component_row_name, sidebar_component_name.image[i])
+          sidebar_content_inner(component_row_name, sidebar_component_name.image[i], sidebar_component_name.link[i])
       )}
     </div>
   );

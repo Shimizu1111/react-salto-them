@@ -1,5 +1,7 @@
 import React from "react";
 import "./style.scss";
+import BreadCrumb from "./bread-crumb/bread-crumb";
+
 export default function Body() {
   const columns = 12;
   const item = (
@@ -14,19 +16,10 @@ export default function Body() {
   for (let i = 0; i < columns; i++) {
     items.push(item);
   }
-  console.log('helloooooooo')
-  console.log(items);
 
   return (
     <div className="right-wrapper">
-      <div className="bread-crumb">
-        <div className="bread-crumb-inner">
-          <img src={'./images/icon-wrapper-h.png'} className="icon-wrapper" />
-          <a href= "https://www.yahoo.co.jp/" >Home</a>
-          /
-          <a href="https://www.yahoo.co.jp/">Users</a>
-        </div>
-      </div>
+      <BreadCrumb />
       <div className="items">
         {items}
       </div>
