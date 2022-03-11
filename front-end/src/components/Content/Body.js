@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.scss";
-import BreadCrumb from "./Bread-crumb/bread-crumb";
+import BreadCrumb from "./bread-crumb/bread-crumb";
 import Pagination from "./Pagination/Pagination";
 
 export default function Body() {

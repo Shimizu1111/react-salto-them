@@ -5,13 +5,11 @@ import User from "./components/Content/User/User";
 
 export default function RouterConfig() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<App />} />
-          <Route path="/users" element={<User />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<App />} />
+        <Route path="/users" element={<User />} />
+      </Routes>
+    </BrowserRouter>
   )
 }

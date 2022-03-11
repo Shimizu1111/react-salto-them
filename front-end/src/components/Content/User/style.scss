@@ -1,5 +1,4 @@
-$backgrount-color: white;
-$border-color: #ccc;
+@import "../../../variable.scss";
 
 .right-wrapper {
 	background-color: $border-color;

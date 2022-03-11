@@ -4,7 +4,7 @@ import Header from "../../Header/Header";
 import Sidebar from "../../Sidebar/Sidebar";
 import Body from "../Body";
 import Footer from "../../Footer/Footer";
-import BreadCrumb from "../Bread-crumb/bread-crumb";
+import BreadCrumb from "../bread-crumb/bread-crumb";
 import Pagination from "../Pagination/Pagination";
 
 export default function User () {
@@ -103,7 +103,7 @@ export default function User () {
                 </tr>
                 {data.map((item) => {
                   return (
-                    <tr>
+                    <tr key={item}>
                       <td class="first_Area">
                         <input type="checkbox" checked={item.checkbox} name="scales" />
                       </td>
