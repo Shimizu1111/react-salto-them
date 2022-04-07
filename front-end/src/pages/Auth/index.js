@@ -1,5 +1,5 @@
 import React from "react";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Https } from '@mui/icons-material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { 
   Avatar,
@@ -12,7 +12,7 @@ import {
   TextField, 
   ThemeProvider, 
   Typography 
-} from "@material-ui/core";
+} from "@mui/material"
 import { Link } from "react-router-dom";
 
 
@@ -34,7 +34,7 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <Https />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -80,7 +80,7 @@ export default function SignIn() {
             >
               Sign In
             </LoadingButton>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -91,7 +91,7 @@ export default function SignIn() {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}

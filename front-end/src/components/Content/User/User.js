@@ -8,8 +8,8 @@ import BreadCrumb from "../bread-crumb/bread-crumb";
 import Pagination from "../Pagination/Pagination";
 import { fetchAsGet } from "../../../services/api";
 import { API } from "../../../configs/constant";
-import MuiPagination from '@material-ui/lab/Pagination';
-import { withStyles } from '@material-ui/core/styles';
+import MuiPagination from "@mui/material/Pagination";
+import { withStyles } from "@mui/styles";
 
 
 export default function User () {
@@ -24,6 +24,7 @@ export default function User () {
 
   const [users, setData] = useState([]);
   // const [page, setPage] = useState(1);
+  // TODO: tokenをreduxで保存する
     const token = "";
 
     console.log(process.env);
@@ -103,8 +104,7 @@ export default function User () {
                 page={page}         //現在のページ番号
                 />
             </div>
-            <Pagination />
-            </div>
+          </div>
           <Footer />
         </div>
       </div>
