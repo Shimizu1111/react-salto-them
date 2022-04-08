@@ -1,5 +1,7 @@
 import React from 'react';
 import './style.scss';
+import { Avatar } from '@mui/material';
+import { height } from '@mui/system';
 
 export default function Header() {
   return (
@@ -12,7 +14,8 @@ export default function Header() {
         <img src='./images/Ellipse176.png' className='ellipse' />
         <img src='./images/Notification.png' className='notification' />
         <img src='./images/Group.png' className='group' />
-        <img src='./images/Beared-guy.png' className='beared-guy' />
+        {/* <img src='./images/Beared-guy.png' className='beared-guy' /> */}
+        <Avatar src='./images/Beared-guy.png' sizes='small' className='beared-guy'>helloo</Avatar>
         <div className='profile'>
           <p>shimiu katsunori</p>
           <p>admin</p>
