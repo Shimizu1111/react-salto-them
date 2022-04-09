@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Https } from '@mui/icons-material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { 
@@ -13,13 +13,60 @@ import {
   ThemeProvider, 
   Typography 
 } from "@mui/material"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { API } from "../../configs/constant";
 
-
+/**
+  - [ ] ログイン処理
+    - [ ] ログイン画面からボタン押下
+      - [x] ユーザ情報確認（API叩く）
+      - [x] ユーザ情報あれば
+        - [x] ユーザ情報保持（トークン・ユーザ名・権限）
+        - [x] ダッシュボードへ画面遷移
+      - [ ] ユーザ情報ない
+        - [ ] ログインエラー時のリダイレクト処理
+*/
 export default function SignIn() {
   console.log("ログイン処理");
-
   const theme = createTheme();
+  const navigate = useNavigate();
+
+  async function handleLogin() {
+    console.log("ログイン処理前");
+    const url = `${API.USER.LOGIN}`
+    // "katsunori.shimizu@salto.link123456"
+    const data = { email: values.email, password: values.password };
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      });
+      if(res.ok != true ) {
+        console.log("responseの結果がfalseになりました");
+        return
+      }
+      const user = await res.json();
+      return navigate(("/users"));
+    } catch {
+      console.log("エラーが吐かれました");
+    }
+  }
+  
+  const [values, setValues] = useState({
+    email: "",
+    password: ""
+  });
+
+  function handleInputChange(e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+    setValues({...values, [name]: value});
+  }
+
 
   return(
     <ThemeProvider theme={theme}>
@@ -48,9 +95,11 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={(event) => handleInputChange(event)}
+              value={values.email}
               // error={errors.email ? true : false}
               // helperText={errors.email ?? ''}
-              // value={values.email}
+              //value="aa"
               // onChange={(e) => handleChange(e)}
             />
 
@@ -62,6 +111,10 @@ export default function SignIn() {
               fullWidth
               autoComplete="current-password"
               type="password"
+              onChange={(event) => handleInputChange(event)}
+              value={values.password}
+              // onChange={(event) => setValue(event.target.value)}
+              // value={value}
               // helperText={errors.password ?? ''}
               // error={errors.password ? true : false}
               // value={values.password}
@@ -72,7 +125,7 @@ export default function SignIn() {
               fullWidth
               size="small"
               color="secondary"
-              // onClick={handleLogin}
+              onClick={handleLogin}
               // endIcon={<SendIcon />}
               // loading={isLoading}
               loadingPosition="end"
