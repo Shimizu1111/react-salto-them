@@ -5,7 +5,7 @@ import { height } from '@mui/system';
 import { blue, red } from '@mui/material/colors';
 
 export default function Header() {
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
 
   return (
     <header>
