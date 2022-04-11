@@ -15,6 +15,10 @@ import {
 } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom";
 import { API } from "../../configs/constant";
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from "../../services/api";
+import { RootState } from '../../redux/store/store'
+import { counterSlice, increment, decrement } from "../../redux/action/signin";
 
 /**
   - [ ] ログイン処理
@@ -23,8 +27,10 @@ import { API } from "../../configs/constant";
       - [x] ユーザ情報あれば
         - [x] ユーザ情報保持（トークン・ユーザ名・権限）
         - [x] ダッシュボードへ画面遷移
-      - [ ] ユーザ情報ない
-        - [ ] ログインエラー時のリダイレクト処理
+      - [x] ユーザ情報ない
+        - [x] ログインエラー時のリダイレクト処理
+      - [x] トークンをreduxのstoreに登録する
+      - [ ] dispatchにトークンは仕込めたので、ユーザー名も入れられるようにする
 */
 export default function SignIn() {
   console.log("ログイン処理");
@@ -49,9 +55,13 @@ export default function SignIn() {
         return
       }
       const user = await res.json();
+      dispatch({type:"counter/signin", payload: user.token});
       return navigate(("/users"));
-    } catch {
+    } catch(e) {
       console.log("エラーが吐かれました");
+      dispatch({type:"counter/decrement", payload: "aaa"});
+      console.log(e);
+      setError({...errors, emailText: "想定外のエラーです", email: true, passwordText: "想定外のエラーです", password: true});
     }
   }
   
@@ -60,13 +70,21 @@ export default function SignIn() {
     password: ""
   });
 
+  const [ errors, setError ] = useState({
+    email: false,
+    emailText: "",
+    password: false,
+    passwordText: ""
+  });
+
   function handleInputChange(e) {
     const target = e.target;
     const value = target.value;
     const name = target.name;
     setValues({...values, [name]: value});
   }
-
+  const count = useSelector((state) => state.counter)
+  const dispatch = useDispatch();
 
   return(
     <ThemeProvider theme={theme}>
@@ -80,6 +98,7 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
+          {/* TODO: dispachにreducersのuserLoginのアクションを渡せるようにしたい */}
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <Https />
           </Avatar>
@@ -97,10 +116,8 @@ export default function SignIn() {
               autoComplete="email"
               onChange={(event) => handleInputChange(event)}
               value={values.email}
-              // error={errors.email ? true : false}
-              // helperText={errors.email ?? ''}
-              //value="aa"
-              // onChange={(e) => handleChange(e)}
+              helperText={errors.emailText}
+              error={errors.email}
             />
 
             <TextField
@@ -113,6 +130,8 @@ export default function SignIn() {
               type="password"
               onChange={(event) => handleInputChange(event)}
               value={values.password}
+              helperText={errors.passwordText}
+              error={errors.password}
               // onChange={(event) => setValue(event.target.value)}
               // value={value}
               // helperText={errors.password ?? ''}
