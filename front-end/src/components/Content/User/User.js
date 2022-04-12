@@ -10,9 +10,13 @@ import { fetchAsGet } from "../../../services/api";
 import { API } from "../../../configs/constant";
 import MuiPagination from "@mui/material/Pagination";
 import { withStyles } from "@mui/styles";
+import { useSelector, useDispatch } from 'react-redux'
 
 
 export default function User () {
+  // reduxでtokenの呼び出し
+  const signinToken = useSelector((state) => state.signin.token);
+
   //ページ番号
   const [page, setPage] = useState(1)
 
@@ -24,8 +28,6 @@ export default function User () {
 
   const [users, setData] = useState([]);
   // const [page, setPage] = useState(1);
-  // TODO: tokenをreduxで保存する
-    const token = "";
 
     console.log(process.env);
     useEffect(() => {
@@ -36,7 +38,7 @@ export default function User () {
         const res = await fetch(url, {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${signinToken}`,
             Accept: "application/json",
             "Content-Type": "application/json",
           },

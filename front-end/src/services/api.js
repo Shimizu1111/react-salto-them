@@ -1,3 +1,5 @@
+// apiの共通部品(ここはまだ利用していない)
+
 import { CONSTANT } from "../configs/constant";
 export const TIME_OUT = CONSTANT.TIME_OUT;
 

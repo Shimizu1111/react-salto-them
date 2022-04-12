@@ -30,18 +30,19 @@ import { counterSlice, increment, decrement } from "../../redux/action/signin";
       - [x] ユーザ情報ない
         - [x] ログインエラー時のリダイレクト処理
       - [x] トークンをreduxのstoreに登録する
-      - [ ] dispatchにトークンは仕込めたので、ユーザー名も入れられるようにする
+      - [x] dispatchにトークンは仕込めたので、ユーザー名も入れられるようにする
 */
+// ログイン処理
 export default function SignIn() {
   console.log("ログイン処理");
   const theme = createTheme();
   const navigate = useNavigate();
 
   async function handleLogin() {
-    console.log("ログイン処理前");
     const url = `${API.USER.LOGIN}`
     // "katsunori.shimizu@salto.link123456"
     const data = { email: values.email, password: values.password };
+    console.log(data);
     try {
       const res = await fetch(url, {
         method: 'POST',
@@ -55,21 +56,35 @@ export default function SignIn() {
         return
       }
       const user = await res.json();
-      dispatch({type:"counter/signin", payload: user.token});
+      // APIで取得した会員情報をstoreに保存
+      dispatch({type:"signin/signinId", payload: user.user.id});
+      dispatch({type:"signin/signinName", payload: user.user.name});
+      dispatch({type:"signin/signinToken", payload: user.token});
       return navigate(("/users"));
     } catch(e) {
       console.log("エラーが吐かれました");
-      dispatch({type:"counter/decrement", payload: "aaa"});
+      dispatch({type:"signin/signinName", payload: 5});
+      dispatch({type:"signin/signinId", payload: 3});
       console.log(e);
       setError({...errors, emailText: "想定外のエラーです", email: true, passwordText: "想定外のエラーです", password: true});
     }
   }
   
+  // フォームの入力情報
   const [values, setValues] = useState({
     email: "",
     password: ""
   });
 
+  // フォームの入力を監視
+  function handleInputChange(e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+    setValues({...values, [name]: value});
+  }
+
+  // バリデーションエラーの情報
   const [ errors, setError ] = useState({
     email: false,
     emailText: "",
@@ -77,13 +92,9 @@ export default function SignIn() {
     passwordText: ""
   });
 
-  function handleInputChange(e) {
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
-    setValues({...values, [name]: value});
-  }
-  const count = useSelector((state) => state.counter)
+  const count = useSelector((state) => state.signin)
+  console.log("hellooooo");
+  console.log(count);
   const dispatch = useDispatch();
 
   return(
@@ -99,7 +110,7 @@ export default function SignIn() {
           }}
         >
           {/* TODO: dispachにreducersのuserLoginのアクションを渡せるようにしたい */}
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <Https />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -143,7 +154,7 @@ export default function SignIn() {
               sx={{ mt: 2, mb: 2 }}
               fullWidth
               size="small"
-              color="secondary"
+              color="primary"
               onClick={handleLogin}
               // endIcon={<SendIcon />}
               // loading={isLoading}

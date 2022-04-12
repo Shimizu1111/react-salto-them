@@ -2,30 +2,31 @@ import { createSlice } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
 const initialState = {
-  value: 0,
+  id: 0,
+  name: "",
   token: "",
 }
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const signinSlice = createSlice({
+  name: 'signin',
   initialState,
   reducers: {
-    signin: (state, action) => {
-      state.token += action.payload
+    signinId: (state, action) => {
+      state.id = action.payload
     },
-    decrement: (state, action) => {
-      state.token += action.payload
+    signinToken: (state, action) => {
+      state.token = action.payload
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    signinName: (state, action) => {
+      state.name = action.payload
     },
   },
 })
 
-export const { increment, decrement, incrementByAmount,  } = counterSlice.actions
+export const { signinId, signinToken, signinName,  } = signinSlice.actions
 
-const rootReducer = combineReducers({
-    callCounter: counterSlice.reducer,
-})
+// const rootReducer = combineReducers({
+//     callSignin: signinSlice.reducer,
+// })
 
-export default rootReducer
+export default signinSlice.reducer
