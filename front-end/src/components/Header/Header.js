@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.scss';
 import { Avatar } from '@mui/material';
-import { height } from '@mui/system';
+import { fontSize, height, style } from '@mui/system';
 import { blue, red } from '@mui/material/colors';
 
 export default function Header() {
@@ -26,6 +26,7 @@ export default function Header() {
           <p>shimiu katsunori</p>
           <p>admin</p>
         </div>
+        <a href='/login' onClick={() => localStorage.clear()}  className="login">ログアウト</a>
       </div>
     </header>
   );
