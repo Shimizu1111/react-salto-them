@@ -11,11 +11,12 @@ import { API } from "../../../configs/constant";
 import MuiPagination from "@mui/material/Pagination";
 import { withStyles } from "@mui/styles";
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 
 export default function User () {
   // reduxでtokenの呼び出し
-  const signinToken = useSelector((state) => state.signin.token);
+  const signinToken = localStorage.getItem("signinToken");
 
   //ページ番号
   const [page, setPage] = useState(1)
@@ -28,6 +29,7 @@ export default function User () {
 
   const [users, setData] = useState([]);
   // const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
     console.log(process.env);
     useEffect(() => {
@@ -35,20 +37,23 @@ export default function User () {
         const url = `${API.USER.GET}?page=${page}`;
         console.log("urlの直後");
         console.log(url);
-        const res = await fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${signinToken}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-        
-  
-        const users = await res.json();
-        setData(users.data);
+        try {
+          const res = await fetch(url, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${signinToken}`,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          });
+          const users = await res.json();
+          setData(users.data);
+        } catch(e) {
+          console.log(e);
+          console.log("エラーの中身です");
+          return navigate(("/login"));
+        }
       }
-  
       fetchData();
     }, [page]);
     

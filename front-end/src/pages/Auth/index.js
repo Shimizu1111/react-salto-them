@@ -21,8 +21,8 @@ import { RootState } from '../../redux/store/store'
 import { counterSlice, increment, decrement } from "../../redux/action/signin";
 
 /**
-  - [ ] ログイン処理
-    - [ ] ログイン画面からボタン押下
+  - [x] ログイン処理
+    - [x] ログイン画面からボタン押下
       - [x] ユーザ情報確認（API叩く）
       - [x] ユーザ情報あれば
         - [x] ユーザ情報保持（トークン・ユーザ名・権限）
@@ -31,6 +31,17 @@ import { counterSlice, increment, decrement } from "../../redux/action/signin";
         - [x] ログインエラー時のリダイレクト処理
       - [x] トークンをreduxのstoreに登録する
       - [x] dispatchにトークンは仕込めたので、ユーザー名も入れられるようにする
+    - [x] ログイン画面以外からURL直打ちした場合にログイン画面に遷移させる
+      - [x] トークンチェック
+        - [x] トークンがある場合にリンク先に遷移
+        - [x] トークンがない場合にログイン画面に遷移
+    - [x] ログアウト機能
+      - [x] トークンの破棄
+      - [ ] ポップアップ(ログアウトの確認、ログアウトしましたのポップアップ(数秒で自動で消える))
+    - [ ] アイコン表示/非表示切り替え機能
+      - [ ] ダッシュボードのリンク先を作成
+      - [ ] ダッシュボード画面のページを作成
+      - [ ] ボタンを押したらアイコンの切り替えを行う
 */
 // ログイン処理
 export default function SignIn() {
@@ -40,6 +51,7 @@ export default function SignIn() {
 
   async function handleLogin() {
     const url = `${API.USER.LOGIN}`
+    console.log(url);
     // "katsunori.shimizu@salto.link123456"
     const data = { email: values.email, password: values.password };
     console.log(data);
@@ -56,11 +68,11 @@ export default function SignIn() {
         return
       }
       const user = await res.json();
-      // APIで取得した会員情報をstoreに保存
-      dispatch({type:"signin/signinId", payload: user.user.id});
-      dispatch({type:"signin/signinName", payload: user.user.name});
-      dispatch({type:"signin/signinToken", payload: user.token});
-      return navigate(("/users"));
+      // APIで取得した会員情報をlocalstrageに保存
+      localStorage.setItem('signinId', user.user.id);
+      localStorage.setItem('signinName', user.user.name);
+      localStorage.setItem('signinToken', user.token);
+      return navigate(("/users"), { replace: true });
     } catch(e) {
       console.log("エラーが吐かれました");
       dispatch({type:"signin/signinName", payload: 5});
