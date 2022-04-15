@@ -31,6 +31,8 @@ import { counterSlice, increment, decrement } from "../../redux/action/signin";
         - [x] ログインエラー時のリダイレクト処理
       - [x] トークンをreduxのstoreに登録する
       - [x] dispatchにトークンは仕込めたので、ユーザー名も入れられるようにする
+      - [ ] その他バリデーション
+        - [ ] 空白チェック
     - [x] ログイン画面以外からURL直打ちした場合にログイン画面に遷移させる
       - [x] トークンチェック
         - [x] トークンがある場合にリンク先に遷移
@@ -38,23 +40,43 @@ import { counterSlice, increment, decrement } from "../../redux/action/signin";
     - [x] ログアウト機能
       - [x] トークンの破棄
       - [ ] ポップアップ(ログアウトの確認、ログアウトしましたのポップアップ(数秒で自動で消える))
-    - [ ] アイコン表示/非表示切り替え機能
-      - [ ] ダッシュボードのリンク先を作成
-      - [ ] ダッシュボード画面のページを作成
-      - [ ] ボタンを押したらアイコンの切り替えを行う
+    - [x] アイコン表示/非表示切り替え機能
+      - [x] ダッシュボードのリンク先を作成
+      - [x] ダッシュボード画面のページを作成
+      - [x] ボタンを押したらアイコンの切り替えを行う
 */
 // ログイン処理
 export default function SignIn() {
   console.log("ログイン処理");
   const theme = createTheme();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function handleLogin() {
     const url = `${API.USER.LOGIN}`
-    console.log(url);
     // "katsunori.shimizu@salto.link123456"
     const data = { email: values.email, password: values.password };
-    console.log(data);
+ 
+    setError({...errors, emailText: "", email: false, passwordText: "", password: false});
+
+    if (data.email == "" && data.password == "") {
+      setError({...errors, emailText: "メールの入力が行われていません", email: true, passwordText: "パスワードの入力が行われていません", password: true});
+      return
+    }
+
+    if(errors.email == "") {
+      setError({...errors, emailText: "メールの入力が行われていません", email: true});
+      console.log(errors)
+      return
+    }
+
+    if(errors.password == "") {
+      setError({...errors, passwordText: "パスワードの入力が行われていません", password: true});
+      console.log(errors);
+      return
+    }
+    
+    // 会員情報取得API
     try {
       const res = await fetch(url, {
         method: 'POST',
@@ -78,7 +100,7 @@ export default function SignIn() {
       dispatch({type:"signin/signinName", payload: 5});
       dispatch({type:"signin/signinId", payload: 3});
       console.log(e);
-      setError({...errors, emailText: "想定外のエラーです", email: true, passwordText: "想定外のエラーです", password: true});
+      setError({...errors, emailText: "メールまたはパスワードが異なります", email: true, passwordText: "メールまたはパスワードが異なります", password: true});
     }
   }
   
@@ -104,10 +126,7 @@ export default function SignIn() {
     passwordText: ""
   });
 
-  const count = useSelector((state) => state.signin)
-  console.log("hellooooo");
-  console.log(count);
-  const dispatch = useDispatch();
+  
 
   return(
     <ThemeProvider theme={theme}>
