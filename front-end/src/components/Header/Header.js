@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { Avatar } from '@mui/material';
 import { fontSize, height, style } from '@mui/system';
 import { blue, red } from '@mui/material/colors';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
-  const [hidden, setHidden] = useState(false);
+  //const [hidden, setHidden] = useState(false);
+  const hidden = useSelector((state) => state.setIcon);
 
   return (
     <header>
@@ -18,9 +20,9 @@ export default function Header() {
         <img src='./images/Notification.png' className='notification' />
         <img src='./images/Group.png' className='group' />
         {/* <img src='./images/Beared-guy.png' className='beared-guy' /> */}
-        {hidden
-          ? <Avatar onClick={() => setHidden(false)} src='./images/Beared-guy.png' className='beared-guy' />
-          : <Avatar onClick={() => setHidden(true)} className='beared-guy' />
+        {hidden.icon
+          ? <Avatar src='./images/Beared-guy.png' className='beared-guy' />
+          : <Avatar className='beared-guy' />
         }
         <div className='profile'>
           <p>shimiu katsunori</p>

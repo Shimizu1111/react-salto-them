@@ -58,7 +58,7 @@ export default function Sidebar() {
     <div className='side-bar'>
       <div className='dashbord'>
         <img src='./images/Dashbord.png' className='dashbord-image' />
-        <p>Dashbord</p>
+        <a href="dashbord">Dashbord</a>
       </div>
       {sidebar_components}
     </div>
