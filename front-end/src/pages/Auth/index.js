@@ -59,10 +59,10 @@ export default function SignIn() {
  
     setError({...errors, emailText: "", email: false, passwordText: "", password: false});
 
-    if (data.email == "" && data.password == "") {
-      setError({...errors, emailText: "メールの入力が行われていません", email: true, passwordText: "パスワードの入力が行われていません", password: true});
-      return
-    }
+    // if (data.email == "" && data.password == "") {
+    //   setError({...errors, emailText: "メールの入力が行われていません", email: true, passwordText: "パスワードの入力が行われていません", password: true});
+    //   return
+    // }
 
     if(errors.email == "") {
       setError({...errors, emailText: "メールの入力が行われていません", email: true});
