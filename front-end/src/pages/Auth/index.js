@@ -140,7 +140,6 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          {/* TODO: dispachにreducersのuserLoginのアクションを渡せるようにしたい */}
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <Https />
           </Avatar>
@@ -174,12 +173,6 @@ export default function SignIn() {
               value={values.password}
               helperText={errors.passwordText}
               error={errors.password}
-              // onChange={(event) => setValue(event.target.value)}
-              // value={value}
-              // helperText={errors.password ?? ''}
-              // error={errors.password ? true : false}
-              // value={values.password}
-              // onChange={(e) => handleChange(e)}
             />
             <LoadingButton
               sx={{ mt: 2, mb: 2 }}
@@ -187,28 +180,13 @@ export default function SignIn() {
               size="small"
               color="primary"
               onClick={handleLogin}
-              // endIcon={<SendIcon />}
-              // loading={isLoading}
               loadingPosition="end"
               variant="contained"
             >
               Sign In
             </LoadingButton>
-            {/* <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   )
