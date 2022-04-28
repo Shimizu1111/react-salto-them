@@ -14,6 +14,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import { API } from "../../configs/constant";
 
+/**
+ * - [ ] ログインしている場合
+ *    - [ ] localhost:3000/login に遷移できないこと(ログアウトするまでは遷移できないこと)
+ * - [ ] ログインしていない場合 
+ *    - [ ] localhost:3000/* に直接アクセスできないこと
+*/
+
 export default function SignIn() {
   console.log("ログイン処理");
   const theme = createTheme();

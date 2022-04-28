@@ -6,13 +6,34 @@ import User from "./components/Content/User/User";
 import SignIn from "./pages/Auth";
 
 export default function RouterConfig() {
+  const isAuthenticated = useAuth()
+  function useAuth() {
+    const signinToken = localStorage.getItem("signinToken");
+    if (signinToken) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<App />} />
-        <Route path="/users" element={<User />} />
-        <Route path="/login" element={<SignIn />} />
-        <Route path="/dashbord" element={ <Dashbord /> } />
+        {isAuthenticated
+          ?
+            <>
+              <Route index element={<App />} />
+              <Route path="/users" element={<User />} />
+              <Route path="/dashbord" element={ <Dashbord /> } />
+              <Route path="/login" element={ <App /> } />
+            </>
+          : 
+          <>
+            <Route index element={<SignIn />} />
+            <Route path="/users" element={<SignIn />} />
+            <Route path="/dashbord" element={ <SignIn /> } />
+            <Route path="/login" element={<SignIn />} />
+          </>
+        }
       </Routes>
     </BrowserRouter>
   )
